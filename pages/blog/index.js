@@ -280,22 +280,43 @@ export default function SalesForceDevelopment({ data }) {
     </div>
   );
 }
+// export async function getServerSideProps() {
+//   const res = await fetch(
+//     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
+//     {
+//       headers: {
+//         'Cache-Control': 'no-cache',
+//         Pragma: 'no-cache',
+//         'If-Modified-Since': '0',
+//         'If-None-Match': '',
+//         'Cache-Control': 'no-store',
+//         Expires: '0',
+//         'X-Date': new Date().toISOString(),
+//       },
+//     }
+//   );
+//   const data = await res.json();
+//   console.log('API blog', data);
+//   return { props: { data } };
+// }
 export async function getServerSideProps() {
-  const res = await fetch(
-    `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
-    {
-      headers: {
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        'If-Modified-Since': '0',
-        'If-None-Match': '',
-        'Cache-Control': 'no-store',
-        Expires: '0',
-        'X-Date': new Date().toISOString(),
+  try {
+    const res = await fetch(
+      `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`
+    );
+    const data = await res.json();
+
+    return {
+      props: {
+        data,
       },
-    }
-  );
-  const data = await res.json();
-  console.log('API blog', data);
-  return { props: { data } };
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        data: [],
+      },
+    };
+  }
 }
