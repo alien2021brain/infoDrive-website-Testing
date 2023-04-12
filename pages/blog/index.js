@@ -280,14 +280,18 @@ export default function SalesForceDevelopment({ data }) {
     </div>
   );
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(
     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
     {
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
-        Expires: 0,
+        'If-Modified-Since': '0',
+        'If-None-Match': '',
+        'Cache-Control': 'no-store',
+        Expires: '0',
+        'X-Date': new Date().toISOString(),
       },
     }
   );
