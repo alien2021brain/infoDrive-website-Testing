@@ -734,7 +734,7 @@ function DrawerAppBar(props) {
                   </List>
                 </Menu>
 
-                <ListItemButton component='a' to='/blog.html'>
+                <ListItemButton component='a' to='/blog'>
                   <ListItemText primary={'Blog'} />
                 </ListItemButton>
                 <ListItemButton component='a' to='/careers.html'>
