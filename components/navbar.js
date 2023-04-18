@@ -386,7 +386,7 @@ function DrawerAppBar(props) {
         </ListItem>
 
         <ListItem disablePadding>
-          <ListItemButton component='a' to='/blog.html'>
+          <ListItemButton component='a' to='/blog'>
             <ListItemText primary={'Blog'} />
           </ListItemButton>
         </ListItem>
