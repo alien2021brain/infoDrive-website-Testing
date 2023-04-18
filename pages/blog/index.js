@@ -93,7 +93,7 @@ export default function SalesForceDevelopment({ data }) {
 
           {/**  category menu */}
 
-          <div className='category flex flex-wrap  gap-2 mt-5  mx-auto md:pl-14 '>
+          <div className='category flex flex-wrap  md:gap-2 gap-5 mt-5  mx-auto md:pl-14 '>
             <div
               className={`button poppin hover:bg-[#f50057]  md:h-fit w-fit p-2  poppin min-w-[150px] text-center border cursor-pointer transition-all ease-out  hover:text-white hover:border-white rounded-lg  ${
                 active === 'All Category'
@@ -280,29 +280,50 @@ export default function SalesForceDevelopment({ data }) {
     </div>
   );
 }
+// export async function getStaticProps() {
+//   const res = await fetch(
+//     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
+//     {
+//       headers: {
+//         'Cache-Control': 'no-cache, no-store, must-revalidate',
+//         Pragma: 'no-cache',
+//         Expires: 0,
+//       },
+//     }
+//   );
+//   const data = await res.json();
+//   console.log('API blog', data);
+//   return { props: { data } };
+// }
 
-
-
-
-
+// This gets called on every request
 export async function getServerSideProps() {
-  try {
-   const res = await fetch(
-     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`
-    );
-    const data = await res.json();
+  // Fetch data from external API
+  const res = await fetch(
+    `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`
+  );
+  const data = await res.json();
 
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
+  // Pass data to the page via props
+  return { props: { data } };
 }
+
+// export async function getServerSideProps() {
+//   const res = await fetch(
+//     `https://mydryve.co/InfoDriveBlog/wp-json/wp/v2/posts?_embed`,
+//     {
+//       headers: {
+//         'Cache-Control': 'no-cache',
+//         Pragma: 'no-cache',
+//         'If-Modified-Since': '0',
+//         'If-None-Match': '',
+//         'Cache-Control': 'no-store',
+//         Expires: '0',
+//         'X-Date': new Date().toISOString(),
+//       },
+//     }
+//   );
+//   const data = await res.json();
+//   console.log('API blog', data);
+//   return { props: { data } };
+// }
